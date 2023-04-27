@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Channels</title>
+</head>
+<body>
+    <h1>Você está na sala: {{nome}}</h1>
+    <textarea style="resize: none; background-color: black; color: white;" rows="15" id="textarea"></textarea>
+    <input type="text" id="message" placeholder="Digite uma mensagem aqui">
+    <button id="btn">
+        Enviar
+    </button>
+
+
+
+
+    <script>
+        const chatSocket = new WebSocket("ws://127.0.0.1:8000/ws/app/{{nome}}/")
+
+        chatSocket.onmessage = function(event){
+            const data = JSON.parse(event.data)
+            document.getElementById('textarea').value += data.message + '\n'
+
+        }
+
+        var btn = document.getElementById('btn')
+        btn.addEventListener("click", function(event){
+            chatSocket.send(JSON.stringify({
+                'message': document.getElementById('message').value  
+            }));
+        }, true)
+
+    </script>
+
+</body>
+</html>
