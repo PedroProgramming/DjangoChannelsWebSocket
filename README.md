@@ -1,7 +1,3 @@
-# DjangoChannelsWebSocket
-
-# Gerenciamento de Eventos
-
 # Inicilização do para testar django-channels
 
 # 1 - Excluir pasta 'venv'
